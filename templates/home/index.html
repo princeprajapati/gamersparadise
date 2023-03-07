@@ -34,8 +34,7 @@
     <h2 align="center">Our Popular Products</h2>
     </br>
     <div class="row">
-
-        {% for product in products %}
+        {% for product in products|slice:":4" %}
         <div class="col-md-3">
             <figure class="card card-product-grid">
                 <div class="img-wrap"> <img src="/media/{{product.product_images.first.image}}"> </div>
