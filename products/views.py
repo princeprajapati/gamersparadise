@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from products.models import Product,Category
+from products.models import Product, Category
 
 
 # Create your views here.
@@ -20,6 +20,10 @@ def category(request):
 
 def checkout(request):
     return render(request, 'shop/checkout.html')
+
+
+def cart(request):
+    return render(request, 'accounts/cart.html')
 
 
 def shop(request):
