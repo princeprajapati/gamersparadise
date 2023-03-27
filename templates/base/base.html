@@ -66,12 +66,13 @@ $(document).ready(function() {
 				</div> <!-- brand-wrap.// -->
 			</div>
 			<div class="col-lg-6 col-sm-12">
-				<form action="#" class="search">
+				<form method="POST" action="{% url 'search' %}">
+					{% csrf_token %}
 					<div class="input-group w-100">
-						<input type="text" class="form-control" placeholder="Search">
+						<input name="game_search" type="search" class="form-control" placeholder="Search">
 						<div class="input-group-append">
 						  <button class="btn btn-primary" type="submit">
-							<i class="fa fa-search"></i>
+							  <i class="fa fa-search"></i></a>
 						  </button>
 						</div>
 					</div>
@@ -79,17 +80,24 @@ $(document).ready(function() {
 			</div> <!-- col.// -->
 			<div class="col-lg-4 col-sm-6 col-8">
 				<div class="widgets-wrap float-md-right">
+					{% if user.is_authenticated %}
 					<div class="widget-header  mr-3">
 						<a href="{% url 'cart' %}" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
 						<span class="badge badge-pill badge-danger notify">0</span>
 					</div>
+					{% endif %}
 					<div class="widget-header icontext">
-						<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
 						<div class="text">
-							<span class="text-muted">Welcome!</span>
 							<div>
+								{% if user.is_authenticated %}
+								<span class="text-muted">Welcome!</span>
+								<a href="{% url 'login' %}">{{ user_obj.username }}</a> |
+								<a href="">Logout</a>
+								{% else %}
+								<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
 								<a href="{% url 'login' %}">Sign in</a> |
 								<a href="{% url 'register' %}"> Register</a>
+								{% endif %}
 							</div>
 						</div>
 					</div>
