@@ -12,6 +12,9 @@ class Category(BaseModel):
         self.slug = slugify(self.category_name)
         super(Category, self).save(*args, **kwargs)
 
+    def clean_url(self):
+        return self.slug.replace('', '-')
+
     def __str__(self) -> str:
         return self.category_name
 

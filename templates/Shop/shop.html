@@ -32,13 +32,10 @@
 										<div class="card-body">
 											<h5 class="card-title">Categories</h5>
 											<ul class="list-menu">
-												<li><a href="#">People <span class="badge badge-pill badge-light float-right">120</span> </a></li>
-												<li><a href="#">Watches <span class="badge badge-pill badge-light float-right">42</span> </a></li>
-												<li><a href="#">Cinema <span class="badge badge-pill badge-light float-right">16</span> </a></li>
-												<li><a href="#">Clothes <span class="badge badge-pill badge-light float-right">87</span> </a></li>
-												<li><a href="#">Home items <span class="badge badge-pill badge-light float-right">34</span></a></li>
-												<li><a href="#">Animals <span class="badge badge-pill badge-light float-right">7</span></a></li>
-												<li><a href="#">People <span class="badge badge-pill badge-light float-right">12</span></a></li>
+												<li><a href="{% url 'shop' %}" class="{% if not active_category %}link-primary{% else %}link-dark{% endif %}">All Categories</a></li>
+												{% for category in categories %}
+												<li><a href="{% url 'shop' %}?category={{category.slug}}" class="{% if category.slug == active_category %}link-primary{% else %}link-dark{% endif %}">{{category.category_name}}</a></li>
+												{% endfor %}
 											</ul>
 										</div>
 									</div>
