@@ -3,8 +3,8 @@ from tkinter import E
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate , login , logout
-from django.http import HttpResponseRedirect,HttpResponse
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
 # Create your views here.
 from .models import Profile
 
@@ -24,7 +24,7 @@ def login_page(request):
         #     return HttpResponseRedirect(request.path_info)
 
         user_obj = authenticate(username=email, password=password)
-        if user_obj:
+        if user_obj is not None:
             login(request, user_obj)
             return redirect('/')
 
@@ -35,26 +35,26 @@ def login_page(request):
 
 
 def register_page(request):
-
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user_obj = User.objects.filter(username = email)
+        user_obj = User.objects.filter(username=email)
 
         if user_obj.exists():
             messages.warning(request, 'Email is already taken.')
             return HttpResponseRedirect(request.path_info)
 
-        print(email)
-
-        user_obj = User.objects.create(first_name = first_name , last_name= last_name , email = email , username = email)
+        user_obj = User.objects.create(first_name=first_name, last_name=last_name, email=email, username=email)
         user_obj.set_password(password)
         user_obj.save()
 
         messages.success(request, 'Registered Successfully')
         return HttpResponseRedirect(request.path_info)
 
+    return render(request, 'accounts/register.html')
 
-    return render(request ,'accounts/register.html')
+#
+# def logout(request):
+#     return render(request, views.LogoutView.as_view)

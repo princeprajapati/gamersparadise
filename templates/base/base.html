@@ -89,10 +89,10 @@ $(document).ready(function() {
 					<div class="widget-header icontext">
 						<div class="text">
 							<div>
-								{% if user.is_authenticated %}
+								{% if request.user.is_authenticated %}
 								<span class="text-muted">Welcome!</span>
-								<a href="{% url 'login' %}">{{ user_obj.username }}</a> |
-								<a href="">Logout</a>
+								<a href="{% url 'login' %}">{{ user.First_Name }}</a> |
+								<a href="{% url 'login' %}">Logout</a>
 								{% else %}
 								<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
 								<a href="{% url 'login' %}">Sign in</a> |
@@ -191,6 +191,6 @@ $(document).ready(function() {
 
 
 
-
+		<script src="https://unpkg.com/htmx.org@1.7.0"></script>
         </body>
         </html>
