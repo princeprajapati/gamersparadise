@@ -13,3 +13,6 @@ def index(request):
 def contact(request):
     return render(request, 'home/contact.html')
 
+
+def about(request):
+    return render(request, 'home/about.html')
