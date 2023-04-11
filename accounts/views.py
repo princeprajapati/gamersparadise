@@ -1,14 +1,11 @@
-from cmath import log
-from tkinter import E
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
+
+
 # Create your views here.
-from .models import Profile
-
-
 def login_page(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -26,7 +23,7 @@ def login_page(request):
         user_obj = authenticate(username=email, password=password)
         if user_obj is not None:
             login(request, user_obj)
-            return redirect('/')
+            return redirect('')
 
         messages.warning(request, 'Invalid credentials')
         return HttpResponseRedirect(request.path_info)
@@ -54,7 +51,3 @@ def register_page(request):
         return HttpResponseRedirect(request.path_info)
 
     return render(request, 'accounts/register.html')
-
-#
-# def logout(request):
-#     return render(request, views.LogoutView.as_view)
