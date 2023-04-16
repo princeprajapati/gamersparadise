@@ -1,7 +1,6 @@
 from django.urls import path
-from products.views import checkout, search
+from products.views import search
 
 urlpatterns = [
-    path('checkout', checkout, name="checkout"),
     path('search', search, name="search")
 ]

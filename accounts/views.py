@@ -1,8 +1,11 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from products.models import Product
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from .models import Cart, CartItems
 
 
 # Create your views here.
@@ -51,3 +54,15 @@ def register_page(request):
         return HttpResponseRedirect(request.path_info)
 
     return render(request, 'accounts/register.html')
+
+
+@login_required
+def add_to_cart(request, uid):
+    product = Product.objects.get(uid=uid)
+    user = request.user
+    cart, _ = Cart.objects.get_or_create(user=user, is_paid=False)
+
+    cart_item = CartItems.objects.create(cart=cart, product=product)
+    # cart_item.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from base.models import BaseModel
+from products.models import Product,Category
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 import uuid
@@ -17,6 +18,16 @@ class Profile(BaseModel):
     profile_image = models.ImageField(upload_to='profile')
 
 
+class Cart(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='carts')
+    is_paid = models.BooleanField(default=False)
+
+
+class CartItems(BaseModel):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+
+#
 # @receiver(post_save, sender=User)
 # def send_email_token(sender, instance, created, **kwargs):
 #     try:

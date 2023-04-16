@@ -46,7 +46,7 @@
 										<div class="img-wrap"> <img src="/media/{{product.product_images.first.image}}"> </div>
 										<figcaption class="info-wrap border-top">
 											<a href="{% url 'get_product' product.slug %}" class="title">{{product.product_name}}</a>
-											<div class="price mt-2">${{product.price}}.00 <a type="button" href="{% url 'checkout' %}" class="btn btn-success btn-sm float-right">Add to cart</a> </div> <!-- price-wrap.// -->
+											<div class="price mt-2">${{product.price}}.00 <a type="button" href="{% url 'add_to_cart' product.uid %}" class="btn btn-success btn-sm float-right">Add to cart</a> </div> <!-- price-wrap.// -->
 										</figcaption>
 									</figure>
 								</div>
