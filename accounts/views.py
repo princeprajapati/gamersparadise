@@ -23,7 +23,7 @@ def login_page(request):
         user_obj = authenticate(username=email, password=password)
         if user_obj is not None:
             login(request, user_obj)
-            return redirect('')
+            return render(request, 'home/index.html')
 
         messages.warning(request, 'Invalid credentials')
         return HttpResponseRedirect(request.path_info)
