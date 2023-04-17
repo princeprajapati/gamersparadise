@@ -81,15 +81,18 @@ $(document).ready(function() {
 			</div> <!-- col.// -->
 			<div class="col-lg-4 col-sm-6 col-8">
 				<div class="widgets-wrap float-md-right">
-					{% if user.is_authenticated %}
-					{% include 'Shop/menu_cart.html' %}
-					{% endif %}
-					<div class="widget-header icontext">
+					<div class="widget-header  mr-3">
+						{% if request.user.is_authenticated %}
+						<a href="{% url 'cart' %}" id="menu-cart-button" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
+						<span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
+						{% endif %}
+					</div>
+					<div class="widget-header context">
 						<div class="text">
 							<div>
 								{% if request.user.is_authenticated %}
 								<span class="text-muted">Welcome!</span>
-								<a href="{% url 'login' %}">{{ user.First_Name }}</a> |
+								<a href="{% url 'login' %}">{{ request.user.first_Name }}</a> |
 								<a href="{% url 'logout' %}">Logout</a>
 								{% else %}
 								<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
