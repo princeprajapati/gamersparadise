@@ -6,9 +6,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import uuid
 
-
-# from base.emails import send_account_activation_email
-
 # Create your models here.
 
 class Profile(BaseModel):
@@ -33,14 +30,3 @@ class CartItems(BaseModel):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
 
-#
-# @receiver(post_save, sender=User)
-# def send_email_token(sender, instance, created, **kwargs):
-#     try:
-#         if created:
-#             email_token = str(uuid.uuid4())
-#             email = instance.email
-#             send_account_activation_email(email, email_token)
-#
-#     except Exception as e:
-#         print(e)

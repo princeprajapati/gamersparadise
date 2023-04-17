@@ -65,6 +65,8 @@ def add_to_cart(request, uid):
     cart_item = CartItems.objects.create(cart=cart, product=product)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 @login_required
 def cart_view(request):
     cart_items = CartItems.objects.filter(cart__user=request.user, cart__is_paid=False)
@@ -76,9 +78,13 @@ def cart_view(request):
     print(context)
     return render(request, 'Shop/cart.html', context)
 
-# def cart(request):
-#     cart = {'cart': Cart.objects.filter(is_paid=False, user=request.user)}
-#     cart_items = cart['cart_items']
-#     context = {'cart_items': cart_items}
-#     print(context)
-#     return render(request, 'Shop/cart.html', context)
+
+def checkout(request):
+    cart_items = CartItems.objects.filter(cart__user=request.user, cart__is_paid=False)
+    total_price = sum(item.product.price for item in cart_items)
+    context = {
+        'cart_items': cart_items,
+        'total_price': total_price
+    }
+    return render(request, 'Shop/checkout.html', context)
+
