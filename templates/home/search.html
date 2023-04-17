@@ -1,0 +1,38 @@
+{% extends "base/base.html" %}
+
+
+{% block start %}
+
+
+<div class="container">
+  <div class="py-5 text-left">
+      <h2>Results for your search...</h2>
+    </div>
+  <div class="row">
+    <!-- Content -->
+        <!-- Products -->
+
+        {% for product in products %}
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"> <img src="/media/{{product.product_images.first.image}}"> </div>
+                <figcaption class="info-wrap border-top">
+                    <a href="{% url 'get_product' product.slug %}" class="title">
+                        <b>{{product.product_name}}</b></a>
+                    <div class="price mt-2">${{product.price}}.00 <a type="button" href="{% url 'add_to_cart' product.uid %}" class="btn btn-success btn-sm float-right">Add to cart</a></div><!-- price-wrap.// -->
+                </figcaption>
+            </figure> <!-- card // -->
+        </div> <!-- col.// -->
+
+        {% endfor %}
+
+        </div>
+        <!-- End Products -->
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+

@@ -1,6 +1,7 @@
 from django.db import models
 from base.models import BaseModel
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 
 class Category(BaseModel):
@@ -11,6 +12,9 @@ class Category(BaseModel):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.category_name)
         super(Category, self).save(*args, **kwargs)
+
+    def clean_url(self):
+        return self.slug.replace('', '-')
 
     def __str__(self) -> str:
         return self.category_name

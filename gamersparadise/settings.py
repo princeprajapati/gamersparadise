@@ -27,6 +27,9 @@ SECRET_KEY = 'django-insecure-9a0yx6)ey-k=rgc)v@5*^$*&t(7yyb)c^e#1d#sv^b74*bd=&(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SESSION_COOKIE_AGE = 86400
+CART_SESSION_ID = 'cart'
+
 ALLOWED_HOSTS = []
 
 
@@ -66,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'gamersparadise.context_processors.cart_count'
             ],
         },
     },
