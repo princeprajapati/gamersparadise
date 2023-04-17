@@ -1,9 +1,7 @@
 from django.shortcuts import render
-from products.models import Product
-
+from products.models import Category, Product
 
 # Create your views here.
-
 
 
 def search(request):
@@ -15,9 +13,3 @@ def search(request):
             context = {'products': Product.objects.filter(product_name__contains=searchedTerm)}
             if context:
                 return render(request, 'home/search.html', context)
-
-
-def checkout(request):
-    return render(request, 'shop/checkout.html')
-
-

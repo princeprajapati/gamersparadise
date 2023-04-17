@@ -74,12 +74,8 @@
         </div> <!-- row.// -->
 
 
-        <a href="#"
-           class="btn  btn-outline-primary"
-           hx-get="{% url 'add_to_cart' product.slug %}"
-           hx-target="#menu-cart-button"
-           hx-swap="outerHTML"
-           > <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></a>
+        <a href="{% url 'add_to_cart' product.uid %}"
+           class="btn  btn-outline-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></a>
     </article> <!-- product-info-aside .// -->
             </main> <!-- col.// -->
         </div> <!-- row.// -->
